@@ -1,4 +1,4 @@
-package com.yuchi.springbootmall.dao;
+package com.yuchi.springbootmall.dto;
 
 import com.yuchi.springbootmall.constant.ProductCategory;
 

@@ -1,8 +1,8 @@
 package com.yuchi.springbootmall.service.impl;
 
-import com.yuchi.springbootmall.constant.ProductCategory;
 import com.yuchi.springbootmall.dao.ProductDao;
-import com.yuchi.springbootmall.dao.ProductRequest;
+import com.yuchi.springbootmall.dto.ProductQueryParams;
+import com.yuchi.springbootmall.dto.ProductRequest;
 import com.yuchi.springbootmall.model.Product;
 import com.yuchi.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category,String search) {
-        return productDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override

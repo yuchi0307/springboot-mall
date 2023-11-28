@@ -1,11 +1,11 @@
 package com.yuchi.springbootmall.controller;
 
 import com.yuchi.springbootmall.constant.ProductCategory;
-import com.yuchi.springbootmall.dao.ProductRequest;
+import com.yuchi.springbootmall.dto.ProductQueryParams;
+import com.yuchi.springbootmall.dto.ProductRequest;
 import com.yuchi.springbootmall.model.Product;
 import com.yuchi.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,7 +72,11 @@ public class ProductController {
             @RequestParam (required = false)ProductCategory category,
             @RequestParam (required = false) String search){
 
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setProductCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
 
