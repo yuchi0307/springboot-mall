@@ -5,6 +5,7 @@ import com.yuchi.springbootmall.dto.ProductQueryParams;
 import com.yuchi.springbootmall.dto.ProductRequest;
 import com.yuchi.springbootmall.model.Product;
 import com.yuchi.springbootmall.service.ProductService;
+import com.yuchi.springbootmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,7 +73,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(
+    public ResponseEntity<Page<Product>> getProducts(
             //查詢條件 Filtering
             @RequestParam (required = false)ProductCategory category,
             @RequestParam (required = false) String search,
@@ -92,10 +93,20 @@ public class ProductController {
         productQueryParams.setLimit(limit);
         productQueryParams.setOffset(offset);
 
-
+        //取得 Product List: 根據前端所傳遞的條件取得資料庫的數據
         List<Product> productList = productService.getProducts(productQueryParams);
 
-        return ResponseEntity.status(HttpStatus.OK).body(productList);
+        //取得 Product 總數
+        Integer total = productService.countProduct(productQueryParams);
+
+        //分頁
+        Page<Product> page = new Page<Product>();
+        page.setLimit(limit);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResults(productList);
+
+        return ResponseEntity.status(HttpStatus.OK).body(page);
 
     }
 }
