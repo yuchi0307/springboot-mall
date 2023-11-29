@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         User user = userDao.getUserByEmail(userLoginRequest.getEmail());
 
         if (user == null){
-            log.warn("該 email { } 尚未註冊", userLoginRequest.getEmail());
+            log.warn("該 email {} 尚未註冊", userLoginRequest.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
