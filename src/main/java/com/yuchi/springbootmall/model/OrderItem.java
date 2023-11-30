@@ -1,10 +1,40 @@
 package com.yuchi.springbootmall.model;
 
+import java.util.List;
+
 public class OrderItem {
-    Integer orderId;
-    Integer productId;
-    Integer quantity;
-    Integer amount;
+    private Integer orderItemId;
+    private Integer orderId;
+    private Integer productId;
+    private Integer quantity;
+    private Integer amount;
+
+    String productName;
+    String imageUrl;
+
+    public Integer getOrderItemId() {
+        return orderItemId;
+    }
+
+    public void setOrderItemId(Integer orderItemId) {
+        this.orderItemId = orderItemId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public Integer getOrderId() {
         return orderId;
@@ -37,4 +67,6 @@ public class OrderItem {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
+
+
 }

@@ -3,6 +3,8 @@ package com.yuchi.springbootmall.controller;
 import com.yuchi.springbootmall.dto.CreateOrderRequest;
 import com.yuchi.springbootmall.model.Order;
 import com.yuchi.springbootmall.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import javax.validation.Valid;
 
 @RestController
 public class OrderController {
+    private final static Logger log = LoggerFactory.getLogger(OrderController.class);
+
 
     @Autowired
     private OrderService oderService;
@@ -22,9 +26,9 @@ public class OrderController {
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOrderRequest createOrderRequest){
 
-       Integer productId = oderService.createOrder(userId, createOrderRequest);
-       //Order order = oderService.getOrderById(productId);
-
-       return ResponseEntity.status(HttpStatus.CREATED).body(productId);
+       Integer orderId = oderService.createOrder(userId, createOrderRequest);
+       Order order = oderService.getOrderById(orderId);
+        log.warn("userID的值: {} ", userId);
+       return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 }

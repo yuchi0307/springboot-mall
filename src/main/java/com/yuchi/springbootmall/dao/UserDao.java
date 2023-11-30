@@ -8,6 +8,5 @@ import org.springframework.stereotype.Component;
 public interface UserDao {
     Integer createUser(UserRegisterRequest userRegisterRequest);
     User getDataById(Integer userId);
-
     User getUserByEmail(String email);
 }

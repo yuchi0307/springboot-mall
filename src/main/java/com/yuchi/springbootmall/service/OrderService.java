@@ -6,5 +6,5 @@ import com.yuchi.springbootmall.model.Order;
 public interface OrderService {
     Integer createOrder(Integer userId, CreateOrderRequest createOrderRequest);
 
-    //Order getOrderById(Integer useId);
+    Order getOrderById(Integer orderId);
 }
