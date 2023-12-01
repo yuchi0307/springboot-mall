@@ -68,7 +68,8 @@ public class ProductDaoImpl implements ProductDao {
         if(productList.size()>0){
             return productList.get(0);
         }else {
-            throw new NoSuchElementException("Product not found with ID: " + productId);
+            //throw new NoSuchElementException("Product not found with ID: " + productId);
+            return null;
         }
 
     }
