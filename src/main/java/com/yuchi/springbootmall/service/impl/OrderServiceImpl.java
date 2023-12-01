@@ -6,6 +6,7 @@ import com.yuchi.springbootmall.dao.ProductDao;
 import com.yuchi.springbootmall.dao.UserDao;
 import com.yuchi.springbootmall.dto.BuyItem;
 import com.yuchi.springbootmall.dto.CreateOrderRequest;
+import com.yuchi.springbootmall.dto.OrderQueryParams;
 import com.yuchi.springbootmall.model.Order;
 import com.yuchi.springbootmall.model.OrderItem;
 import com.yuchi.springbootmall.model.Product;
@@ -20,7 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class OrderServiceImpl implements OrderService {
@@ -100,4 +103,25 @@ public class OrderServiceImpl implements OrderService {
 
         return order;
     }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for(Order order : orderList){
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+
+            order.setOrderItemList(orderItemList);
+
+        }
+        return orderList;
+    }
+
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+
+        return orderDao.countOrder(orderQueryParams);
+
+    }
+
 }
